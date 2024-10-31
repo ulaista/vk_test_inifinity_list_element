@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/vk_test_inifinity_list_element/static/css/main.e6c13ad2.css",
+    "main.js": "/vk_test_inifinity_list_element/static/js/main.c2163030.js",
+    "index.html": "/vk_test_inifinity_list_element/index.html",
+    "main.e6c13ad2.css.map": "/vk_test_inifinity_list_element/static/css/main.e6c13ad2.css.map",
+    "main.c2163030.js.map": "/vk_test_inifinity_list_element/static/js/main.c2163030.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.c2163030.js"
+  ]
+}
