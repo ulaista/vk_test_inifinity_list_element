@@ -2,32 +2,42 @@ import React, { useState } from "react";
 import { Button } from "antd";
 import { observer } from "mobx-react-lite";
 import EditModal from "../EditModal";
-import dataStore from "../../stores/DataStore";
+import styles from "./ListItem.module.css";
 
 interface ListItemProps {
-  item: any;
-  onDelete: ()=> void;
-  onEdit: ()=> void;
+  item: {
+    id: number;
+    name: string;
+    description: string;
+  };
+  onDelete: () => void;
+  onEdit: (newName: string) => void;
 }
 
-const ListItem: React.FC<ListItemProps> = observer(({ item }) => {
+const ListItem: React.FC<ListItemProps> = observer(({ item, onDelete, onEdit }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const handleEdit = (newName: string) => {
-    dataStore.editItem(item.id, { name: newName });
+  const handleSave = (newName: string) => {
+    onEdit(newName);
+    setModalVisible(false);
   };
 
   return (
-    <div>
-      <h3>{item.name}</h3>
-      <p>{item.description}</p>
-      <Button onClick={() => setModalVisible(true)}>Edit</Button>
-      <Button onClick={() => dataStore.deleteItem(item.id)}>Delete</Button>
-
+    <div className={styles.item}>
+      <h3 className={styles.title}>{item.name}</h3>
+      <p className={styles.description}>{item.description}</p>
+      <div className={styles.actions}>
+        <Button className={styles.button} onClick={() => setModalVisible(true)}>
+          Edit
+        </Button>
+        <Button className={`${styles.button} ${styles.delete}`} onClick={onDelete}>
+          Delete
+        </Button>
+      </div>
       <EditModal
         open={isModalVisible}
         onClose={() => setModalVisible(false)}
-        onSave={handleEdit}
+        onSave={handleSave}
         initialValue={item.name}
       />
     </div>

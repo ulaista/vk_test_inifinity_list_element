@@ -1,0 +1,35 @@
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--modal-background);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  border-radius: 8px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.input {
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.button {
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  background-color: var(--button-background);
+  color: var(--button-text);
+}
+
+.button:hover {
+  background-color: var(--button-background-hover);
+}

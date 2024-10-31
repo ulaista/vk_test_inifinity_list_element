@@ -1,17 +1,9 @@
 .container {
+  max-width: 800px;
+  margin: 0 auto;
   padding: 20px;
-}
-
-.controls {
-  margin-bottom: 20px;
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-}
-
-.spinner {
-  text-align: center;
-  margin-top: 20px;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  transition: background-color 0.3s, border-color 0.3s;
 }
