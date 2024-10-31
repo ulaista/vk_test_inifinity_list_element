@@ -8,7 +8,7 @@ export const fetchRepositories = async (page: number, sort: string) => {
   const response = await axios.get(GITHUB_API_URL, {
     headers,
     params: {
-      q: "javascript",
+      q: "vk",
       sort,
       order: "asc",
       page
