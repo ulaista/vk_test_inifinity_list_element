@@ -11,14 +11,14 @@ interface ListItemProps {
     description: string;
   };
   onDelete: () => void;
-  onEdit: (newName: string) => void;
+  onEdit: (updatedFields: { [key: string]: string }) => void;
 }
 
 const ListItem: React.FC<ListItemProps> = observer(({ item, onDelete, onEdit }) => {
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const handleSave = (newName: string) => {
-    onEdit(newName);
+  const handleSave = (updatedFields: { [key: string]: string }) => {
+    onEdit(updatedFields);
     setModalVisible(false);
   };
 
@@ -38,7 +38,7 @@ const ListItem: React.FC<ListItemProps> = observer(({ item, onDelete, onEdit }) 
         open={isModalVisible}
         onClose={() => setModalVisible(false)}
         onSave={handleSave}
-        initialValue={item.name}
+        initialValues={{ name: item.name, description: item.description }} // передаем начальные значения полей
       />
     </div>
   );

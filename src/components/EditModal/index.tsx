@@ -1,24 +1,37 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Input } from "antd";
-import styles from "./EditModal.module.css";
+import { Modal, Input, Form } from "antd";
 
 interface EditModalProps {
   open: boolean;
   onClose: () => void;
-  onSave: (newName: string) => void;
-  initialValue: string;
+  onSave: (updatedFields: { [key: string]: string }) => void;
+  initialValues: { [key: string]: string };
 }
 
-const EditModal: React.FC<EditModalProps> = ({ open, onClose, onSave, initialValue }) => {
-  const [value, setValue] = useState(initialValue);
+const EditModal: React.FC<EditModalProps> = ({ open, onClose, onSave, initialValues }) => {
+  const [values, setValues] = useState(initialValues);
 
   useEffect(() => {
-    setValue(initialValue);
-  }, [initialValue]);
+    setValues(initialValues);
+  }, [initialValues]);
+
+  const handleChange = (field: string, value: string) => {
+    setValues((prevValues) => ({
+      ...prevValues,
+      [field]: value,
+    }));
+  };
 
   const handleSave = () => {
-    onSave(value);
+    onSave(values);
     onClose();
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSave();
+    }
   };
 
   return (
@@ -28,12 +41,18 @@ const EditModal: React.FC<EditModalProps> = ({ open, onClose, onSave, initialVal
       onOk={handleSave}
       onCancel={onClose}
     >
-      <div className={styles.modal}>
-        <Input
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="Enter new name"
-        />
+      <div onKeyDown={handleKeyDown}>
+        <Form layout="vertical">
+          {Object.keys(initialValues).map((field) => (
+            <Form.Item key={field} label={field.charAt(0).toUpperCase() + field.slice(1)}>
+              <Input
+                value={values[field]}
+                onChange={(e) => handleChange(field, e.target.value)}
+                placeholder={`Enter new ${field}`}
+              />
+            </Form.Item>
+          ))}
+        </Form>
       </div>
     </Modal>
   );

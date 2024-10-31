@@ -33,13 +33,11 @@ class DataStore {
     }
   };
 
-  editItem = (id: number, newData: any) => {
-    runInAction(() => {
-      this.data = this.data.map((item) =>
-        item.id === id ? { ...item, ...newData } : item
-      );
-    });
-  };
+  editItem(id: number, updatedFields: { [key: string]: string }) {
+    this.data = this.data.map((item) =>
+      item.id === id ? { ...item, ...updatedFields } : item
+    );
+  }
 
   deleteItem = (id: number) => {
     runInAction(() => {
