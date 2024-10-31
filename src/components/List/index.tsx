@@ -19,7 +19,7 @@ const List: React.FC = observer(() => {
             key={item.id}
             item={item}
             onDelete={() => dataStore.deleteItem(item.id)}
-            onEdit={(newName) => dataStore.editItem(item.id, { name: newName })}
+            onEdit={(updatedFields) => dataStore.editItem(item.id, updatedFields)}
           />
         )}
       />

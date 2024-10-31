@@ -7,16 +7,26 @@ describe("EditModal Component", () => {
   const onClose = jest.fn();
   const onSave = jest.fn();
 
-  it("renders with initial value", () => {
+  it("renders with initial values", () => {
     render(
-      <EditModal open={true} onClose={onClose} onSave={onSave} initialValue="Initial Name" />
+      <EditModal 
+        open={true} 
+        onClose={onClose} 
+        onSave={onSave} 
+        initialValues={{ name: "Initial Name" }}
+      />
     );
     expect(screen.getByDisplayValue("Initial Name")).toBeInTheDocument();
   });
 
   it("calls onSave with updated value", async () => {
     render(
-      <EditModal open={true} onClose={onClose} onSave={onSave} initialValue="Initial Name" />
+      <EditModal 
+        open={true} 
+        onClose={onClose} 
+        onSave={onSave} 
+        initialValues={{ name: "Initial Name" }}
+      />
     );
 
     const input = screen.getByDisplayValue("Initial Name");
@@ -27,12 +37,17 @@ describe("EditModal Component", () => {
     });
 
     userEvent.click(screen.getByRole("button", { name: /ok/i }));
-    await waitFor(() => expect(onSave).toHaveBeenCalledWith("Updated Name"));
+    await waitFor(() => expect(onSave).toHaveBeenCalledWith({ name: "Updated Name" }));
   });
 
   it("calls onClose when canceled", async () => {
     render(
-      <EditModal open={true} onClose={onClose} onSave={onSave} initialValue="Initial Name" />
+      <EditModal 
+        open={true} 
+        onClose={onClose} 
+        onSave={onSave} 
+        initialValues={{ name: "Initial Name" }}
+      />
     );
 
     // eslint-disable-next-line testing-library/no-unnecessary-act

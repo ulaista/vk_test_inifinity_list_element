@@ -38,7 +38,7 @@ const ListItem: React.FC<ListItemProps> = observer(({ item, onDelete, onEdit }) 
         open={isModalVisible}
         onClose={() => setModalVisible(false)}
         onSave={handleSave}
-        initialValues={{ name: item.name, description: item.description }} // передаем начальные значения полей
+        initialValues={{ name: item.name, description: item.description }}
       />
     </div>
   );
