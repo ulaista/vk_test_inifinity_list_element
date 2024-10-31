@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Input } from "antd";
+import styles from "./EditModal.module.css";
 
 interface EditModalProps {
   open: boolean;
@@ -11,6 +12,10 @@ interface EditModalProps {
 const EditModal: React.FC<EditModalProps> = ({ open, onClose, onSave, initialValue }) => {
   const [value, setValue] = useState(initialValue);
 
+  useEffect(() => {
+    setValue(initialValue);
+  }, [initialValue]);
+
   const handleSave = () => {
     onSave(value);
     onClose();
@@ -19,11 +24,17 @@ const EditModal: React.FC<EditModalProps> = ({ open, onClose, onSave, initialVal
   return (
     <Modal
       title="Edit Item"
-      open={open} 
+      open={open}
       onOk={handleSave}
       onCancel={onClose}
     >
-      <Input value={value} onChange={(e) => setValue(e.target.value)} />
+      <div className={styles.modal}>
+        <Input
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder="Enter new name"
+        />
+      </div>
     </Modal>
   );
 };

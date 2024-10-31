@@ -4,25 +4,27 @@ import { useDataContext } from "../../contexts/DataContext";
 import { List as AntList } from "antd";
 import ListItem from "../ListItem";
 import Loader from "../Loader";
+import styles from "./List.module.css";
 
-const List = observer(() => {
+const List: React.FC = observer(() => {
   const dataStore = useDataContext();
 
   return (
-    <>
+    <div className={styles.container}>
       <AntList
         itemLayout="vertical"
         dataSource={dataStore.data}
         renderItem={(item) => (
           <ListItem
+            key={item.id}
             item={item}
             onDelete={() => dataStore.deleteItem(item.id)}
-            onEdit={() => dataStore.editItem(item.id, { name: "Updated Name" })}
+            onEdit={(newName) => dataStore.editItem(item.id, { name: newName })}
           />
         )}
       />
       {dataStore.loading && <Loader />}
-    </>
+    </div>
   );
 });
 
